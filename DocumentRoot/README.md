@@ -1,2 +1,2 @@
 # DocumentRoot
-Paste your website code Here!
+Paste your website code Here! inside **public/**.
