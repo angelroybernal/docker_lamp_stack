@@ -4,21 +4,21 @@ services:
         build:
             context: ./php-apache
         ports:
-            - 8080:80
+            - 80:80
         volumes:
             - ./DocumentRoot:/var/www/html
         links:
-            - 'mariadb'
+            - "mariadb"
     mariadb:
-        image: mariadb:10.1
+        image: mariadb:10.4
         volumes:
             - mariadb:/var/lib/mysql
         environment:
             TZ: "America/Panama"
             MYSQL_ALLOW_EMPTY_PASSWORD: "no"
-            MYSQL_ROOT_PASSWORD: "toor"
-            MYSQL_USER: 'testuser'
-            MYSQL_PASSWORD: 'testpwd'
-            MYSQL_DATABASE: 'testdb'
+            MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+            MYSQL_USER: ${MYSQL_USER}
+            MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+            MYSQL_DATABASE: ${MYSQL_DATABASE}
 volumes:
     mariadb:

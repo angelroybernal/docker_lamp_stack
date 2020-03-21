@@ -1,4 +1,4 @@
-FROM php:7.0.27-apache
+FROM php:7.4-apache
 MAINTAINER angelroybernal
 
 
@@ -6,27 +6,28 @@ MAINTAINER angelroybernal
 RUN DEBIAN_FRONTEND=noninteractive \
 apt-get update \
 && apt-get install -qy \
-git \
-libicu-dev \
-libmcrypt-dev \
-libpng-dev \
-libxml2-dev \
-nano \
-mysql-client \
-dnsutils \
+    git \
+    libzip-dev \
+    libicu-dev \
+    libmcrypt-dev \
+    libonig-dev \
+    libpng-dev \
+    libxml2-dev \
+    default-mysql-client \
+    dnsutils \
 && apt-get clean
 
 
 # Install PHP extensions
-RUN docker-php-ext-install \
-gd \
-intl \
-mbstring \
-mcrypt \
-opcache \
-pdo_mysql \
-soap \
-zip
+RUN pecl install mcrypt-1.0.3 && \
+docker-php-ext-install \
+    gd \
+    intl \
+    mbstring \
+    opcache \
+    pdo_mysql \
+    soap \
+    zip
 
 
 RUN a2enmod headers \
